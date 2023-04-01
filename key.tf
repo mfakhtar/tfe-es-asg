@@ -12,7 +12,7 @@ resource "aws_key_pair" "ssh_key_pair" {
 
 resource "local_file" "foo" {
   content         = tls_private_key.ssh_key.private_key_pem
-  filename        = aws_key_pair.ssh_key_pair.key_name
+  filename        = "${aws_key_pair.ssh_key_pair.key_name}.pem"
   file_permission = "0400"
 }
 

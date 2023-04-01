@@ -66,18 +66,6 @@ resource "aws_lb_listener" "fawaz-asg-lb-listner-replicated" {
     type = "forward"
     target_group_arn = aws_lb_target_group.asg-target-replicated.arn
   }
-
-/*
-  default_action {
-    type = "fixed-response"      
-
-  fixed_response {
-    content_type = "text/plain"
-    message_body = "404: page not found"
-    status_code  = 404
-    }
-  }
-  */
 }
 
 resource "aws_lb_listener" "fawaz-asg-lb-listner-http" {
@@ -97,17 +85,17 @@ resource "aws_lb_target_group" "asg-target-http" {
   port = 80
   protocol = "HTTP"
   vpc_id = aws_vpc.guide-tfe-es-vpc.id
-/*
+
   health_check {
     path = "/"
     protocol = "HTTP"
-    matcher = "200"
-    interval = 15
-    timeout = 3
-    healthy_threshold = 2
+    matcher = "301"
+    interval = 30
+    timeout = 5
+    healthy_threshold = 5
     unhealthy_threshold = 2
   }
-  */
+
 }
 
 resource "aws_lb_target_group" "asg-target-replicated" {
@@ -115,23 +103,14 @@ resource "aws_lb_target_group" "asg-target-replicated" {
   port = 8800
   protocol = "HTTP"
   vpc_id = aws_vpc.guide-tfe-es-vpc.id
-}
 
-/*
-resource "aws_lb_listener_rule" "lb-asg-listner-rule" {
-  listener_arn = aws_lb_listener.fawaz-asg-lb-listner.arn
-  priority = 100
-
-  condition {
-    path_pattern {
-      values = ["*"]
-    }
+  health_check {
+    path = "/"
+    protocol = "HTTP"
+    matcher = "303"
+    interval = 30
+    timeout = 5
+    healthy_threshold = 5
+    unhealthy_threshold = 2
   }
-
-  action {
-    type = "forward"
-    target_group_arn = aws_lb_target_group.asg-target.arn
-  }
-  
 }
-*/
