@@ -1,0 +1,6 @@
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+license.rli
+terraform.tfstate*
+*.pem

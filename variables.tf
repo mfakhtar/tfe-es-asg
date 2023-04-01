@@ -1,0 +1,15 @@
+variable "az1" {}
+variable "az2" {}
+variable "db_instance_type" {}
+variable "db_pass" {}
+variable "db_subnet_cidr_az1" {}
+variable "db_subnet_cidr_az2" {}
+variable "db_user" {}
+variable "hostname" {}
+variable "instance_type" {}
+variable "region" {}
+variable "subnet_cidr" {}
+variable "tfe-pwd" {}
+variable "tfe_release_sequence" {}
+variable "vpc_cidr" {}
+variable "unique_name" {}
